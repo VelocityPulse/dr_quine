@@ -6,7 +6,7 @@
 #    By: cchameyr <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/27 14:12:08 by cchameyr          #+#    #+#              #
-#    Updated: 2018/02/27 14:21:34 by cchameyr         ###   ########.fr        #
+#    Updated: 2018/02/27 14:22:59 by cchameyr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,8 +42,8 @@ CC =			gcc
 
 all: $(NAME_COLLEEN) $(NAME_GRACE) $(NAME_SULLY)
 
-$(NAME): $(LIBFT) $(OBJS)
-	$(CC) $(FLAGS) $(OBJS) $(LIBFT) -o $(NAME)
+$(NAME): $(OBJS)
+	$(CC) $(FLAGS) $(OBJS) -o $(NAME)
 
 $(OBJS):
 	$(CC) $(FLAGS) -c $(SRCS)
@@ -51,14 +51,11 @@ $(OBJS):
 
 objs_mv:
 	@mkdir objs
-	@mv $(FILES:.c=.o) ./objs
+	@mv *.o ./objs
 
 objs_rm:
 	@$(RM) objs
-	@$(RM) $(FILES:.c=.o)
-
-$(LIBFT):
-	make -C ./libft
+	@$(RM) *.o
 
 clean: objs_rm
 	make clean -C ./libft
