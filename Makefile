@@ -6,7 +6,7 @@
 #    By: cchameyr <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/27 14:12:08 by cchameyr          #+#    #+#              #
-#    Updated: 2018/02/27 14:22:59 by cchameyr         ###   ########.fr        #
+#    Updated: 2018/02/27 14:59:35 by cchameyr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,12 +42,24 @@ CC =			gcc
 
 all: $(NAME_COLLEEN) $(NAME_GRACE) $(NAME_SULLY)
 
-$(NAME): $(OBJS)
-	$(CC) $(FLAGS) $(OBJS) -o $(NAME)
+$(NAME_COLLEEN): $(OBJS_COLLEEN)
+	$(CC) $(FLAGS) $(OBJS_COLLEEN) -o $(NAME_COLLEEN)
 
-$(OBJS):
-	$(CC) $(FLAGS) -c $(SRCS)
+$(OBJS_COLLEEN):
+	$(CC) $(FLAGS) -c $(SRCS_COLLEEN)
 	@make objs_mv
+
+$(NAME_GRACE): $(OBJS_GRACE)
+	$(CC) $(FLAGS) $(OBJS_GRACE) -o $(NAME_GRACE)
+
+$(OBJS_GRACE):
+	$(CC) $(FLAGS) -c $(SRCS_GRACE)
+
+$(NAME_SULLY): $(OBJS_SULLY)
+	$(CC) $(FLAGS) $(OBJS_SULLY) -o $(NAME_SULLY)
+
+$(OBJS_SULLY):
+	$(CC) $(FLAGS) -c $(SRCS_SULLY)
 
 objs_mv:
 	@mkdir objs
@@ -58,13 +70,12 @@ objs_rm:
 	@$(RM) *.o
 
 clean: objs_rm
-	make clean -C ./libft
 
 fclean: clean
-	$(RM) $(LIBFT) $(NAME)
+	$(RM) $(NAME_COLLEEN) $(NAME_GRACE) $(NAME_SULLY)
 
 re: fclean all
 
 r: objs_rm
-	$(RM) $(NAME)
+	$(RM) $(NAME_COLLEEN) $(NAME_GRACE) $(NAME_SULLY)
 	@make
