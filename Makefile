@@ -1,81 +1,42 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: cchameyr <marvin@42.fr>                    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2018/02/27 14:12:08 by cchameyr          #+#    #+#              #
-#    Updated: 2018/02/27 14:59:35 by cchameyr         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+.PHONY: all clean fclean re
 
-NAME_COLLEEN =	Colleen
+CC = clang
 
-FILES_COLLEEN = Colleen.c
+FLAGS = -Wall -Wextra -Werror
 
-SRCS_COLLEEN =			$(addprefix srcs_colleen/, $(FILES_COLLEEN))
+NAME = Colleen Grace Sully
 
-OBJS_COLLEEN =			$(addprefix objs/, $(FILES_COLLEEN:.c=.o))
+all: $(NAME)
 
-NAME_GRACE =	Grace
+Colleen:
+	@$(CC) $(FLAGS) -c Colleen.c
+	@$(CC) $(FLAGS) Colleen.o -o Colleen
+	@echo "\033[1;34mDr_Quine\t\033[1;33mCompilation - Colleen\t\033[0;32m[OK]\033[0m"
 
-FILES_GRACE = Grace.c
+Grace:
+	@$(CC) $(FLAGS) -c Grace.c
+	@$(CC) $(FLAGS) Grace.o -o Grace
+	@echo "\033[1;34mDr_Quine\t\033[1;33mCompilation - Grace\t\033[0;32m[OK]\033[0m"
 
-SRCS_GRACE =			$(addprefix srcs_grace/, $(FILES_GRACE))
+Sully:
+	@$(CC) $(FLAGS) -c Sully.c
+	@$(CC) $(FLAGS) Sully.o -o Sully
+	@echo "\033[1;34mDr_Quine\t\033[1;33mCompilation - Sully\t\033[0;32m[OK]\033[0m"
 
-OBJS_GRACE =			$(addprefix objs/, $(FILES_GRACE:.c=.o))
-
-NAME_SULLY =	Sully
-
-FILES_SULLY = Sully_5.c
-
-SRCS_SULLY =			$(addprefix srcs_sully/, $(FILES_SULLY))
-
-OBJS_SULLY =			$(addprefix objs/, $(FILES_SULLY:.c=.o))
-
-FLAGS =			-Wall -Werror -Wextra
-
-RM =			rm -rf
-
-CC =			gcc
-
-all: $(NAME_COLLEEN) $(NAME_GRACE) $(NAME_SULLY)
-
-$(NAME_COLLEEN): $(OBJS_COLLEEN)
-	$(CC) $(FLAGS) $(OBJS_COLLEEN) -o $(NAME_COLLEEN)
-
-$(OBJS_COLLEEN):
-	$(CC) $(FLAGS) -c $(SRCS_COLLEEN)
-	@make objs_mv
-
-$(NAME_GRACE): $(OBJS_GRACE)
-	$(CC) $(FLAGS) $(OBJS_GRACE) -o $(NAME_GRACE)
-
-$(OBJS_GRACE):
-	$(CC) $(FLAGS) -c $(SRCS_GRACE)
-
-$(NAME_SULLY): $(OBJS_SULLY)
-	$(CC) $(FLAGS) $(OBJS_SULLY) -o $(NAME_SULLY)
-
-$(OBJS_SULLY):
-	$(CC) $(FLAGS) -c $(SRCS_SULLY)
-
-objs_mv:
-	@mkdir objs
-	@mv *.o ./objs
-
-objs_rm:
-	@$(RM) objs
-	@$(RM) *.o
-
-clean: objs_rm
+clean:
+	@rm -rf Colleen.o
+	@rm -rf Grace.o
+	@rm -rf Sully.o
+	@echo "\033[1;34mDr_Quine\t\033[1;33mCleaning obj\t\t\033[0;32m[OK]\033[0m"
 
 fclean: clean
-	$(RM) $(NAME_COLLEEN) $(NAME_GRACE) $(NAME_SULLY)
+	@rm -rf Colleen
+	@rm -rf Grace
+	@rm -rf Grace_kid.c
+	@rm -rf Sully
+	@rm -rf Sully_*
+	@rm -rf a.out
+	@rm -rf tmp
+	@echo "\033[1;34mDr_Quine\t\033[1;33mCleaning all\t\t\033[0;32m[OK]\033[0m"
 
 re: fclean all
-
-r: objs_rm
-	$(RM) $(NAME_COLLEEN) $(NAME_GRACE) $(NAME_SULLY)
-	@make
