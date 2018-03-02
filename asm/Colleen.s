@@ -1,22 +1,20 @@
 %define MACH_SYSCALL(nb) 0x2000000 | nb
+%define STDOUT 1
+%define WRITE 4
 
 section .data
-	msg: db "hello world!", 10
-	len: equ $-msg
+hello:
+	.msg db "hello world!", 10, 0
+	.len equ $-hello.msg
 
 section .text
-global start
 global _main
-
-start:
-call _main
-ret
+extern _printf
 
 _main:
-mov rax, 4
-mov rbx, 1
-mov rcx, msg
-mov rdx, len
-mov rax, MACH_SYSCALL(4)
-syscall
+push rbp
+mov rbp, rsp
+lea rdi, [rel hello.msg]
+call _printf
+leave
 ret
