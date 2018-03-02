@@ -2,7 +2,11 @@
 
 ASM = nasm
 
-N_FLAGS = -f elf -DOSX
+N_FLAGS = -f macho64 -DOSX
+
+LD = ld
+
+LD_FLAGS = -macosx_version_min 10.8 -lSystem
 
 CC = clang
 
@@ -14,17 +18,17 @@ all: $(NAME)
 
 Colleen:
 	@$(ASM) $(N_FLAGS) Colleen.s
-	@$(CC) $(FLAGS) Colleen.o -o Colleen
+	@$(LD) Colleen.o $(LD_FLAGS) -o Colleen
 	@echo "\033[1;34mDr_Quine\t\033[1;33mCompilation - Colleen\t\033[0;32m[OK]\033[0m"
 
 Grace:
 	@$(ASM) $(N_FLAGS) Grace.s
-	@$(CC) $(FLAGS) Grace.o -o Grace
+	@$(LD) Grace.o $(LD_FLAGS) -o Grace
 	@echo "\033[1;34mDr_Quine\t\033[1;33mCompilation - Grace\t\033[0;32m[OK]\033[0m"
 
 Sully:
 	@$(ASM) $(N_FLAGS) Sully.s
-	@$(CC) $(FLAGS) Sully.o -o Sully
+	@$(LD) Sully.o $(LD_FLAGS) -o Sully
 	@echo "\033[1;34mDr_Quine\t\033[1;33mCompilation - Sully\t\033[0;32m[OK]\033[0m"
 
 clean:
