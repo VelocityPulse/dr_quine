@@ -48,3 +48,5 @@ fclean: clean
 	@echo "\033[1;34mDr_Quine\t\033[1;33mCleaning all\t\t\033[0;32m[OK]\033[0m"
 
 re: fclean all
+
+r: fclean Colleen
