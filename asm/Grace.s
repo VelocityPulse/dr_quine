@@ -29,6 +29,12 @@ mov rdx, 666o
 syscall
 
 mov r15, rax
+
+cmp r15, -1
+je exit
+cmp r15, 2
+je exit
+
 mov rdi, r15
 lea rsi, [rel fmt]
 lea rdx, [rel nl]
@@ -40,6 +46,7 @@ call _dprintf
 mov rax, 0x2000006
 mov rdi, r15
 syscall
+exit:
 leave
 ret
 %endmacro
