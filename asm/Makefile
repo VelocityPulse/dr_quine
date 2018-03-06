@@ -40,7 +40,7 @@ clean:
 fclean: clean
 	@rm -rf Colleen
 	@rm -rf Grace
-	@rm -rf Grace_kid.c
+	@rm -rf Grace_kid.s
 	@rm -rf Sully
 	@rm -rf Sully_*
 	@rm -rf a.out
@@ -49,4 +49,5 @@ fclean: clean
 
 re: fclean all
 
-r: fclean Colleen
+r: fclean Colleen Grace
+	make clean
