@@ -12,7 +12,7 @@ CC = clang
 
 FLAGS = -Wall -Wextra -Werror
 
-NAME = Colleen Grace Sully
+NAME = Colleen Grace
 
 all: $(NAME)
 
@@ -41,6 +41,7 @@ fclean: clean
 	@rm -rf Colleen
 	@rm -rf Grace
 	@rm -rf Grace_kid.s
+	@rm -rf Grace_kid.o
 	@rm -rf Sully
 	@rm -rf Sully_*
 	@rm -rf a.out
@@ -49,5 +50,5 @@ fclean: clean
 
 re: fclean all
 
-r: fclean Colleen Grace
+r: fclean Colleen Grace Sully
 	make clean
