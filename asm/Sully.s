@@ -1,10 +1,15 @@
 section .data
+index db 5
 nl db 10, 0
 qmark db 34, 0
 fmt_compile db "", 0
 fmt_copy db "", 0
 fmt_sully_x db "Sully_%d.s", 0
 fmt_debug db "debug %d", 10, 0 ; TO REMOVE
+fmt_debug2 db "debug : %s", 10, 0 ; TO REMOVE
+
+section .bss
+buff resb 100
 
 section .text
 global _main
@@ -26,12 +31,32 @@ _main:
 push rbp
 mov rbp, rsp
 
-push 2
-pop rsi
+lea rsi, [rel index]
 cmp rsi, 0
 jle exit
 
-call _debug ; TO REMOVE
+lea rdi, [rel fmt_debug]
+call _printf
+
+pop rdi
+mov rsi, rdi
+lea rdi, [rel fmt_debug]
+call _printf
+
+jmp exit
+
+mov rdi, buff
+lea rsi, [rel fmt_sully_x]
+pop rdx
+call _sprintf
+
+
+lea rdi, [rel fmt_debug2]
+mov rsi, buff
+;call _printf
+
+
+
 
 exit:
 leave
