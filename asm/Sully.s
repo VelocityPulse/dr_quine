@@ -16,13 +16,13 @@ global _main
 global _debug ; TO REMOVE
 extern _dprintf
 extern _sprintf
+extern _bzero
 extern _printf ; TO REMOVE
 
 _debug: ; TO REMOVE
 push rbp ; TO REMOVE
 mov rbp, rsp ; TO REMOVE
 lea rdi, [rel fmt_debug] ; TO REMOVE
-mov rsi, 1 ; TO REMOVE
 call _printf ; TO REMOVE
 leave ; TO REMOVE
 ret ; TO REMOVE
@@ -31,7 +31,8 @@ _main:
 push rbp
 mov rbp, rsp
 
-mov rsi, [rel index]
+mov r15, [rel index]
+mov rsi, r15
 cmp rsi, 0
 jle exit
 
@@ -40,9 +41,25 @@ lea rsi, [rel fmt_sully_x]
 mov rdx, [rel index]
 call _sprintf
 
-lea rdi, [rel fmt_debug2]
-mov rsi, buff
-call _printf
+mov rax, 0x2000005
+mov rdi, buff
+mov rsi, 0
+syscall
+
+cmp rax, 2
+je pass
+cmp rax, -1
+je pass
+sub r15, 1
+pass:
+
+mov rdi, buff
+mov rsi, 100
+call _bzero
+mov rdi, buff
+lea rsi, [rel fmt_sully_x]
+mov rdx, r15
+call _sprintf
 
 
 exit:
