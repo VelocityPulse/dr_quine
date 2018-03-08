@@ -1,5 +1,5 @@
 section .data
-index db 5
+index db 2000
 nl db 10, 0
 qmark db 34, 0
 fmt_compile db "", 0
@@ -31,12 +31,15 @@ _main:
 push rbp
 mov rbp, rsp
 
-lea rsi, [rel index]
-cmp rsi, 0
-jle exit
+;mov rsi, [rel index]
+;cmp rsi, 0
+;jle exit
 
 lea rdi, [rel fmt_debug]
+lea rsi, [rel index]
 call _printf
+
+jmp exit
 
 pop rdi
 mov rsi, rdi
