@@ -1,5 +1,5 @@
 section .data
-index db 2000
+index dd 5
 nl db 10, 0
 qmark db 34, 0
 fmt_compile db "", 0
@@ -31,34 +31,18 @@ _main:
 push rbp
 mov rbp, rsp
 
-;mov rsi, [rel index]
-;cmp rsi, 0
-;jle exit
-
-lea rdi, [rel fmt_debug]
-lea rsi, [rel index]
-call _printf
-
-jmp exit
-
-pop rdi
-mov rsi, rdi
-lea rdi, [rel fmt_debug]
-call _printf
-
-jmp exit
+mov rsi, [rel index]
+cmp rsi, 0
+jle exit
 
 mov rdi, buff
 lea rsi, [rel fmt_sully_x]
-pop rdx
+mov rdx, [rel index]
 call _sprintf
-
 
 lea rdi, [rel fmt_debug2]
 mov rsi, buff
-;call _printf
-
-
+call _printf
 
 
 exit:
