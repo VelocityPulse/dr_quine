@@ -12,7 +12,7 @@ CC = clang
 
 FLAGS = -Wall -Wextra -Werror
 
-NAME = Colleen Grace
+NAME = Colleen Grace Sully
 
 all: $(NAME)
 
